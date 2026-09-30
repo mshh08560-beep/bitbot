@@ -1,0 +1,8 @@
+{
+  "name": "Bitbot",
+  "description": "בוט שאומר את האמת ישר בפרצוף, חד, מצחיק ויודע לריב ולהחזיר קונטרות כשצריך",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

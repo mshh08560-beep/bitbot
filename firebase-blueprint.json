@@ -1,0 +1,77 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile document",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Firebase Auth UID"
+        },
+        "email": {
+          "type": "string",
+          "description": "User email address"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User display name"
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "User profile photo URL"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Account creation timestamp"
+        }
+      },
+      "required": ["userId", "email"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "A single chat message belonging to a user",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner user UID"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["user", "assistant"],
+          "description": "Message author role"
+        },
+        "content": {
+          "type": "string",
+          "maxLength": 10000,
+          "description": "Text content of the message"
+        },
+        "timestamp": {
+          "type": "number",
+          "description": "Epoch timestamp of the message"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "Optional generated image URL"
+        },
+        "isImage": {
+          "type": "boolean",
+          "description": "Whether this is an image response"
+        }
+      },
+      "required": ["userId", "role", "content", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile collection restricted to the authenticated user"
+    },
+    "/users/{userId}/messages/{messageId}": {
+      "schema": "ChatMessage",
+      "description": "Chat messages stream belonging to the authenticated user"
+    }
+  }
+}
